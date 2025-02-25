@@ -1,0 +1,234 @@
+---
+title: "Class 5: Data Vis with ggplot"
+author: "Sion Kang (PID: A17052234)"
+format: pdf
+---
+
+## Intro to ggplot
+
+There are many graphics systems in R (ways to make plots and figures). These include "base" R plots. Today we will focus mostly on the **ggplot2** package.
+
+Let's start with a plot of a simple in-built dataset called `cars`.
+
+```{r}
+head(cars)
+```
+
+```{r}
+plot(cars)
+```
+
+Let's see how we can make this figure using **ggplot**. First I need to install this package on my computer. To install any R package I use the function `install.packages()`.
+
+> I will run `install.packages("ggplot2")` in my R console not this quarto document!
+
+Before I can use any functions from add on packages I need to load the package from my "library()" with the `library(ggplot2)` call. 
+
+```{r}
+library(ggplot2)
+ggplot(cars)
+```
+
+All ggplot figures have at least 3 things (called layers). These include:
+
+- **data** (the input dataset I want to plot from)
+- **aes** (the aesthetic mapping of the data to my plot)
+- **geoms** (the geom_point(), geom_line(), etc. that I want to draw).
+
+```{r}
+ggplot(cars) + 
+  aes(x=speed, y=dist) +
+  geom_point()
+```
+
+Let's add a line to show the relationship here:
+
+```{r}
+ggplot(cars) + 
+  aes(x=speed, y=dist) +
+  geom_point() +
+  geom_smooth(method="lm") +
+  theme_bw() +
+  labs(title="My first GGPLOT")
+```
+
+
+
+>Q1 Which geometric layer should be used to create scatter plots in ggplot2?
+
+geom_point()
+
+## Gene expression figure
+
+The code to read the dataset
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+```
+
+
+> How many genes are in this dataset?
+
+```{r}
+nrow(genes)
+```
+
+
+> Use the table() function on the State column of this data.frame to find out how many ‘up’ regulated genes there are. What is your answer?
+
+```{r}
+table(genes$State)
+```
+
+
+>Using your values above and 2 significant figures. What fraction of total genes is up-regulated in this dataset?
+
+```{r}
+round( table(genes$State)/nrow(genes), 4)
+```
+
+```{r}
+n.tot <- nrow(genes)
+vals <- table(genes$State)
+
+vals.percent <- vals/n.tot*100
+round(vals.percent, 2)
+```
+
+
+
+A first plot of this dataset
+
+```{r}
+ggplot(genes) +
+  aes(x=Condition1, y=Condition2, col=State) +
+  geom_point()+
+  theme_bw()+
+  labs(title="Gene Expression changes upon drug treatment", x="Control Expression", 
+       y="Drug Presence Expression") + 
+  theme_linedraw()
+
+
+```
+
+```{r}
+p<- ggplot(genes) +
+  aes(x=Condition1, y=Condition2, col=State) +
+  geom_point()
+
+p
+#p + scale_colour_manual( values=c("blue","gray","red") )
+```
+
+```{r}
+p + labs(title="Hello")
+```
+
+```{r}
+p + theme_minimal()
+
+```
+
+```{r}
+p + scale_colour_manual(values=c("blue","gray","red")) +
+    labs(title="Gene Expresion Changes Upon Drug Treatment",
+         x="Control (no drug) ",
+         y="Drug Treatment")
+```
+
+## Gapminder
+
+File location online
+```{r}
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+head(gapminder)
+```
+
+I will run `install.packages("dplyr")` in the R console.
+
+```{r}
+library(dplyr)
+
+gapminder_2007 <- gapminder %>% filter(year==2007)
+```
+
+```{r}
+head(gapminder_2007)
+```
+> Q. Complete the code below to produce a first basic scater plot of this `gapminder_2007` dataset:
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp) +
+  geom_point(alpha=0.5)
+```
+
+Adding more variables to `aes()`
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +
+  geom_point(alpha=0.4)
+```
+
+Points by the numeric variable population pop
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp, color=pop) +
+  geom_point(alpha=0.8)
+```
+
+Adjusting point size 
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x = gdpPercap, y = lifeExp, size = pop) +
+  geom_point(alpha=0.5)
+```
+
+Adjusting point size to be proportional to the poulation
+
+```{r}
+ggplot(gapminder_2007) + 
+  geom_point(aes(x = gdpPercap, y = lifeExp,
+                 size = pop), alpha=0.5) + 
+  scale_size_area(max_size = 10)
+```
+
+> Q. Can you adapt the code you have learned thus far to reproduce our gapminder scatter plot for the year 1957? What do you notice about this plot is it easy to compare with the one for 2007?
+
+```{r}
+library(dplyr)
+
+gapminder_1957 <- gapminder %>% filter(year==1957)
+
+ggplot(gapminder_1957) + 
+  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +
+  geom_point(alpha=0.7)+
+  scale_size_area(max_size = 15)
+```
+
+>Q. Do the same steps above but include 1957 and 2007 in your input dataset for `ggplot()`. You should now include the layer `facet_wrap(~year)` to produce the following plot:
+
+```{r}
+gapminder_1957 <- gapminder %>% filter(year==1957 | year==2007)
+
+ggplot(gapminder_1957) + 
+  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +
+  geom_point(alpha=0.7)+
+  scale_size_area(max_size = 15)+ 
+  facet_wrap(~year)
+```
+
+
+
+
+
+
+
+

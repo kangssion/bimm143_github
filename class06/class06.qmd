@@ -1,0 +1,134 @@
+---
+title: "R functions"
+author: "Sion Kang (PID: A17052234)"
+format: pdf
+---
+
+Today we will get more exposure to functions in R. We call functions to do all our work and today we will learn how to write our own.
+
+## A first silly function
+
+Note that arguments 2 and 3 have default values (because we set y=0 and z=0) so we don't have to supply them when we call our function.
+
+```{r}
+add <- function(x, y=0, z=0) {
+  x + y + z
+}
+```
+
+Can I just use this
+
+```{r}
+add(1,1)
+add(1, c(10, 100))
+```
+
+```{r}
+add(100)
+```
+```{r}
+add(100, 10, 1)
+```
+
+## A second more fun function
+
+Let's write a function that generates random nucleotide sequences
+
+WE can make use of the in-built `sample()` function in R to help us here.
+
+```{r}
+sample(x=1:10, size=9)
+```
+
+```{r}
+sample(x=1:10, size=11, replace = TRUE)
+```
+
+> Q. Can you use `sample()` to generate a random nucleotide sequence of length 5.
+
+```{r}
+sample(c("A", "T", "G", "C"), size=5, replace = TRUE)
+```
+
+```{r}
+nt <- c("A", "T", "G", "C")
+sample(nt, size=5, replace = TRUE)
+```
+
+> Q. Write a function `generate_dna()` that makes a nucleotide sequence of a user specified length.
+
+Every function in R has at least 3 things:
+
+- a **name** (in our case "generate_dna")
+- one or more **input arguments** (the "length" of sequence we want)
+- a body (R code that does the work)
+
+```{r}
+generate_dna <- function(length) {
+  nt <- c("A", "T", "G", "C")
+  sample(nt, size=length, replace = TRUE)
+}
+```
+
+```{r}
+generate_dna(10)
+```
+
+> Q. Can you write a `generate_protein()` function that returns an amino acid sequence of a user requested length?
+
+```{r}
+bio3d::aa.table$aa1[1:20]
+```
+
+```{r}
+generate_protein <- function(length) {
+  aa <- bio3d::aa.table$aa1[1:20]
+  sample(aa, size=length, replace = TRUE)
+}
+```
+
+```{r}
+generate_protein(10)
+```
+
+I want my output of this function not to be a vector with one amino acid per element but rather a one element single string
+
+```{r}
+nt <- c("A", "T", "G", "C")
+paste(nt, collapse="")
+```
+
+```{r}
+generate_protein <- function(length) {
+  aa <- bio3d::aa.table$aa1[1:20]
+  s<- sample(aa, size=length, replace = TRUE)
+  paste(s, collapse="")
+}
+```
+
+```{r}
+generate_protein(10)
+```
+
+> Q. Generate protein sequences fcrom length 6 to 12?
+
+```{r}
+generate_protein(6)
+generate_protein(7)
+
+```
+
+We can use the useful utility function `sapply()` to help us "apply" our function over all the values 6 to 12.
+
+```{r}
+ans<- sapply(6:12, generate_protein)
+ans
+```
+
+```{r}
+cat( paste(">ID.", 6:12, sep="", "\n", ans, "\n"), sep="") 
+```
+
+> Q. Are any of these sequences unique in nature - i.e. never foundin nature. We can search "refseq-protein" and look for 100% ID and 100% coverage matches with BLASTp.
+
+My ID.6 and ID.7 had 100% ID and 100% coverage matches but all the longer sequences, ID.8-12 are unique in nature (<100% in ID and coverage). As the length of the random sequence gets longer, the possible permutations is too great; the probability of the sequence having 100% ID and 100% coverage to existing sequences in nature is extremely small for sequences of that length. 
