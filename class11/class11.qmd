@@ -1,0 +1,245 @@
+---
+title: "AlphaFold Analysis"
+author: "Sion Kang (PID: A17052234)"
+date: 02/11/25
+format: pdf
+toc: TRUE
+---
+
+## Custom Results of resulting models
+
+Here we analyze our AlphaFold structure prediction models. The input directory/folder comes from the ColabFold server: 
+
+```{r}
+results_dir <- "hivpr_monomer_94b5b_0/"
+```
+
+```{r}
+# File names for all PDB models
+pdb_files <- list.files(path=results_dir,
+                        pattern="*.pdb",
+                        full.names = TRUE)
+
+# Print our PDB file names
+basename(pdb_files)
+```
+
+I will use the Bio3D package for analysis
+```{r}
+library(bio3d)
+```
+
+Align and superpose
+
+
+```{r}
+pdbs <- pdbaln(pdb_files, fit=TRUE, exefile="msa")
+```
+
+A quick PCA
+```{r}
+pc <- pca(pdbs)
+plot(pc)
+```
+
+## RMSD analysis
+RMSD is a common measure of structural distance used in structural biology.
+
+```{r}
+rd <- rmsd(pdbs, fit=T)
+```
+
+```{r}
+rd
+```
+
+```{r}
+library(pheatmap)
+
+colnames(rd) <- paste0("m",1:5)
+rownames(rd) <- paste0("m",1:5)
+pheatmap(rd)
+```
+
+## Analysis of AlphaFold structure prediction models for my Find a Gene Project
+
+Used ColabFold to generate a model for my structure of interest for the Find a Gene Project.
+
+```{r}
+tasl_dir <- "findagene_TASL_a2aa2/"
+```
+
+```{r}
+# File names for all PDB models
+taslpdbfiles <- list.files(path=tasl_dir,
+                        pattern="*.pdb",
+                        full.names = TRUE)
+
+# Print our PDB file names
+basename(taslpdbfiles)
+```
+
+Align and superpose
+
+```{r}
+taslpdbs <- pdbaln(taslpdbfiles, fit=TRUE, exefile="msa")
+```
+A quick PCA
+
+```{r}
+tasl.pc <- pca(taslpdbs)
+plot(tasl.pc)
+```
+
+### RMSD analysis
+RMSD is a common measure of structural distance used in structural biology.
+
+```{r}
+taslrd <- rmsd(taslpdbs, fit=T)
+taslrd
+```
+
+```{r}
+library(pheatmap)
+
+colnames(taslrd) <- paste0("m",1:5)
+rownames(taslrd) <- paste0("m",1:5)
+pheatmap(taslrd)
+```
+
+```{r}
+plotb3(taslpdbs$b[1,], typ="l", lwd=2)
+points(taslpdbs$b[2,], typ="l", col="red")
+points(taslpdbs$b[3,], typ="l", col="blue")
+points(taslpdbs$b[4,], typ="l", col="darkgreen")
+points(taslpdbs$b[5,], typ="l", col="orange")
+abline(v=100, col="gray")
+```
+
+```{r}
+core <- core.find(taslpdbs)
+```
+
+```{r}
+core.inds <- print(core, vol=0.5)
+```
+
+```{r}
+xyz <- pdbfit(taslpdbs, core.inds, outpath="corefit_structures")
+```
+
+```{r}
+rf <- rmsf(xyz)
+
+plotb3(rf, sse=taslpdbs)
+abline(v=100, col="gray", ylab="RMSF")
+```
+
+### Predicted Alignment Error for Domains
+
+```{r}
+library(jsonlite)
+
+# Listing of all PAE JSON files
+pae_files <- list.files(path=tasl_dir,
+                        pattern=".*model.*\\.json",
+                        full.names = TRUE)
+```
+
+```{r}
+pae1 <- read_json(pae_files[1],simplifyVector = TRUE)
+pae2 <- read_json(pae_files[2],simplifyVector = TRUE)
+pae3 <- read_json(pae_files[3],simplifyVector = TRUE)
+pae4 <- read_json(pae_files[4],simplifyVector = TRUE)
+pae5 <- read_json(pae_files[5],simplifyVector = TRUE)
+
+attributes(pae1)
+```
+
+```{r}
+pae1$max_pae
+pae2$max_pae
+pae3$max_pae
+pae4$max_pae
+pae5$max_pae
+```
+
+```{r}
+#plot of the N by N PAE scores of the model with the lowest max PAE score
+plot.dmat(pae3$pae, 
+          xlab="Residue Position (i)",
+          ylab="Residue Position (j)")
+```
+
+```{r}
+#plot of the N by N PAE scores of the model with the highest max PAE score
+plot.dmat(pae5$pae, 
+          xlab="Residue Position (i)",
+          ylab="Residue Position (j)",
+          grid.col = "black",
+          zlim=c(0,30))
+```
+
+```{r}
+plot.dmat(pae3$pae, 
+          xlab="Residue Position (i)",
+          ylab="Residue Position (j)",
+          grid.col = "black",
+          zlim=c(0,30))
+```
+
+
+### Residue conservation from alignment file
+
+```{r}
+aln_file <- list.files(path=tasl_dir,
+                       pattern=".a3m$",
+                        full.names = TRUE)
+aln_file
+```
+
+```{r}
+aln <- read.fasta(aln_file[1], to.upper = TRUE)
+```
+
+How many sequences are in this alignment
+```{r}
+dim(aln$ali)
+```
+
+```{r}
+sim <- conserv(aln)
+sim
+```
+
+```{r}
+con <- consensus(aln, cutoff = 0.9)
+con$seq
+```
+
+```{r}
+m1.pdb <- read.pdb(taslpdbfiles[1])
+#occ <- vec2resno(c(sim[1:60], sim[1:60]), m1.pdb$atom$resno)
+#write.pdb(m1.pdb, o=occ, file="m1_conserv.pdb")
+
+# Unable to run code. Original example using HIV-Pr monomer also does not work (see below)
+```
+
+```{r}
+aln_file1 <- list.files(path=results_dir,
+                       pattern=".a3m$",
+                        full.names = TRUE)
+aln1 <- read.fasta(aln_file1[1], to.upper = TRUE)
+dim(aln1$ali)
+sim1 <- conserv(aln1)
+con1 <- consensus(aln1, cutoff = 0.9)
+con1$seq
+```
+```{r}
+m1.pdb1 <- read.pdb(pdb_files[1])
+#occ1 <- vec2resno(c(sim1[1:99], sim1[1:99]), m1.pdb1$atom$resno)
+#write.pdb(m1.pdb1, o=occ1, file="m1_conserv1.pdb")
+
+# This is the original code, which gives " Error in vec2resno(c(sim1[1:99], sim1[1:99]), m1.pdb1$atom$resno) : Length miss-match of 'vec' and concetive 'resno' "
+```
+
