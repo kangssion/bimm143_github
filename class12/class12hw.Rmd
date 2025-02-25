@@ -1,0 +1,55 @@
+---
+title: 'Class 12 pt.2 HW: Q13, Q14'
+author: 'Sion Kang (PID: A17052234)'
+date: "2025-02-13"
+output: pdf_document
+---
+
+## Section 4: Population Scale Analysis
+
+One sample is obviously not enough to know what is happening in a population. You are interested in assessing genetic differences on a population scale. So, you processed about ~230 samples and did the normalization on a genome level. Now, you want to find whether there is any association of the 4 asthma-associated SNPs (rs8067378...) on ORMDL3 expression.
+
+### Q13
+How many samples do we have?
+
+```{r}
+expr <- read.table("rs8067378_ENSG00000172057.6.txt")
+head(expr)
+```
+
+```{r}
+nrow(expr)
+```
+
+The sample size for each genotype
+```{r}
+table(expr$geno)
+```
+
+**A/A: 108, A/G: 233, G/G: 121**
+
+Finding the median expression levels for each genotype
+
+```{r}
+summary(expr$exp[expr$geno == "A/A"])
+summary(expr$exp[expr$geno == "A/G"])
+summary(expr$exp[expr$geno == "G/G"])
+```
+
+
+**A/A median: 31.25; A/G median: 25.065; G/G median: 20.074**
+
+
+```{r}
+library(ggplot2)
+```
+
+Q. 14
+Let's make a boxplot
+
+```{r}
+ggplot(expr) +
+  aes(x=geno, y=exp, fill=geno) +
+  geom_boxplot(notch=TRUE)
+```
+**From this boxplot, we can infer that the expression value is correlated to the genotypes (A/A, G/G). Thus, we can infer that the SNP effects the expression of ORMDL3.**
