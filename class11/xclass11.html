@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sion Kang (PID: A17052234)">
-<meta name="dcterms.date" content="2025-02-11">
 
 <title>AlphaFold Analysis</title>
 <style>
@@ -83,12 +82,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#custom-results-of-resulting-models" id="toc-custom-results-of-resulting-models" class="nav-link active" data-scroll-target="#custom-results-of-resulting-models">Custom Results of resulting models</a></li>
   <li><a href="#rmsd-analysis" id="toc-rmsd-analysis" class="nav-link" data-scroll-target="#rmsd-analysis">RMSD analysis</a></li>
-  <li><a href="#analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project" id="toc-analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project" class="nav-link" data-scroll-target="#analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project">Analysis of AlphaFold structure prediction models for my Find a Gene Project</a>
-  <ul class="collapse">
+  <li><a href="#analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project" id="toc-analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project" class="nav-link" data-scroll-target="#analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project">Analysis of AlphaFold structure prediction models for my Find a Gene Project</a></li>
   <li><a href="#rmsd-analysis-1" id="toc-rmsd-analysis-1" class="nav-link" data-scroll-target="#rmsd-analysis-1">RMSD analysis</a></li>
-  <li><a href="#predicted-alignment-error-for-domains" id="toc-predicted-alignment-error-for-domains" class="nav-link" data-scroll-target="#predicted-alignment-error-for-domains">Predicted Alignment Error for Domains</a></li>
-  <li><a href="#residue-conservation-from-alignment-file" id="toc-residue-conservation-from-alignment-file" class="nav-link" data-scroll-target="#residue-conservation-from-alignment-file">Residue conservation from alignment file</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -110,12 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 11, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -246,7 +235,6 @@ hivpr_monomer_94b5b_0_unrelaxed_rank_005_alphafold2_ptm_model_2_seed_000        
 </section>
 <section id="analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-of-alphafold-structure-prediction-models-for-my-find-a-gene-project">Analysis of AlphaFold structure prediction models for my Find a Gene Project</h2>
-<p>Used ColabFold to generate a model for my structure of interest for the Find a Gene Project.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tasl_dir <span class="ot">&lt;-</span> <span class="st">"findagene_TASL_a2aa2/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -299,8 +287,9 @@ pdb/seq: 5   name: findagene_TASL_a2aa2//findagene_TASL_a2aa2_unrelaxed_rank_005
 </div>
 </div>
 </div>
-<section id="rmsd-analysis-1" class="level3">
-<h3 class="anchored" data-anchor-id="rmsd-analysis-1">RMSD analysis</h3>
+</section>
+<section id="rmsd-analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="rmsd-analysis-1">RMSD analysis</h2>
 <p>RMSD is a common measure of structural distance used in structural biology.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>taslrd <span class="ot">&lt;-</span> <span class="fu">rmsd</span>(taslpdbs, <span class="at">fit=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -355,222 +344,6 @@ findagene_TASL_a2aa2_unrelaxed_rank_005_alphafold2_ptm_model_2_seed_000         
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(taslpdbs<span class="sc">$</span>b[<span class="dv">1</span>,], <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(taslpdbs<span class="sc">$</span>b[<span class="dv">2</span>,], <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(taslpdbs<span class="sc">$</span>b[<span class="dv">3</span>,], <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(taslpdbs<span class="sc">$</span>b[<span class="dv">4</span>,], <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"darkgreen"</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(taslpdbs<span class="sc">$</span>b[<span class="dv">5</span>,], <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"orange"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">100</span>, <span class="at">col=</span><span class="st">"gray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class11_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>core <span class="ot">&lt;-</span> <span class="fu">core.find</span>(taslpdbs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> core size 59 of 60  vol = 70.003 
- core size 58 of 60  vol = 55.056 
- core size 57 of 60  vol = 53.513 
- core size 56 of 60  vol = 49.883 
- core size 55 of 60  vol = 46.861 
- core size 54 of 60  vol = 43.317 
- core size 53 of 60  vol = 39.188 
- core size 52 of 60  vol = 35.499 
- core size 51 of 60  vol = 29.9 
- core size 50 of 60  vol = 24.083 
- core size 49 of 60  vol = 17.676 
- core size 48 of 60  vol = 13.991 
- core size 47 of 60  vol = 7.669 
- core size 46 of 60  vol = 2.502 
- core size 45 of 60  vol = 1.329 
- core size 44 of 60  vol = 0.483 
- FINISHED: Min vol ( 0.5 ) reached</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>core.inds <span class="ot">&lt;-</span> <span class="fu">print</span>(core, <span class="at">vol=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># 45 positions (cumulative volume &lt;= 0.5 Angstrom^3) 
-  start end length
-1     1  45     45</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> <span class="fu">pdbfit</span>(taslpdbs, core.inds, <span class="at">outpath=</span><span class="st">"corefit_structures"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">rmsf</span>(xyz)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(rf, <span class="at">sse=</span>taslpdbs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in plotb3(rf, sse = taslpdbs): Length of input 'sse' does not equal the
-length of input 'x'; Ignoring 'sse'</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">100</span>, <span class="at">col=</span><span class="st">"gray"</span>, <span class="at">ylab=</span><span class="st">"RMSF"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class11_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="predicted-alignment-error-for-domains" class="level3">
-<h3 class="anchored" data-anchor-id="predicted-alignment-error-for-domains">Predicted Alignment Error for Domains</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Listing of all PAE JSON files</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>pae_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path=</span>tasl_dir,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern=</span><span class="st">".*model.*</span><span class="sc">\\</span><span class="st">.json"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pae1 <span class="ot">&lt;-</span> <span class="fu">read_json</span>(pae_files[<span class="dv">1</span>],<span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>pae2 <span class="ot">&lt;-</span> <span class="fu">read_json</span>(pae_files[<span class="dv">2</span>],<span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pae3 <span class="ot">&lt;-</span> <span class="fu">read_json</span>(pae_files[<span class="dv">3</span>],<span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>pae4 <span class="ot">&lt;-</span> <span class="fu">read_json</span>(pae_files[<span class="dv">4</span>],<span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>pae5 <span class="ot">&lt;-</span> <span class="fu">read_json</span>(pae_files[<span class="dv">5</span>],<span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pae1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$names
-[1] "plddt"   "max_pae" "pae"     "ptm"    </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pae1<span class="sc">$</span>max_pae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.4375</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pae2<span class="sc">$</span>max_pae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.54688</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pae3<span class="sc">$</span>max_pae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29.98438</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pae4<span class="sc">$</span>max_pae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.70312</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pae5<span class="sc">$</span>max_pae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.32812</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot of the N by N PAE scores of the model with the lowest max PAE score</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dmat</span>(pae3<span class="sc">$</span>pae, </span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab=</span><span class="st">"Residue Position (i)"</span>,</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab=</span><span class="st">"Residue Position (j)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class11_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot of the N by N PAE scores of the model with the highest max PAE score</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dmat</span>(pae5<span class="sc">$</span>pae, </span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab=</span><span class="st">"Residue Position (i)"</span>,</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab=</span><span class="st">"Residue Position (j)"</span>,</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">grid.col =</span> <span class="st">"black"</span>,</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">zlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class11_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dmat</span>(pae3<span class="sc">$</span>pae, </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab=</span><span class="st">"Residue Position (i)"</span>,</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab=</span><span class="st">"Residue Position (j)"</span>,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">grid.col =</span> <span class="st">"black"</span>,</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">zlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="class11_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="residue-conservation-from-alignment-file" class="level3">
-<h3 class="anchored" data-anchor-id="residue-conservation-from-alignment-file">Residue conservation from alignment file</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>aln_file <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path=</span>tasl_dir,</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pattern=</span><span class="st">".a3m$"</span>,</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>aln_file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "findagene_TASL_a2aa2//findagene_TASL_a2aa2.a3m"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>aln <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(aln_file[<span class="dv">1</span>], <span class="at">to.upper =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] " ** Duplicated sequence id's: 101 **"</code></pre>
-</div>
-</div>
-<p>How many sequences are in this alignment</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(aln<span class="sc">$</span>ali)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 487  76</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">conserv</span>(aln)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1.493447e-01  5.951412e-01  3.629030e-01  6.720714e-01  4.315470e-01
- [6]  5.394065e-01  5.363027e-01  3.298426e-01  4.483095e-01  5.389696e-01
-[11]  5.285277e-01  5.551567e-01  8.614597e-01  7.974455e-01  5.502531e-01
-[16]  3.820629e-01  7.542509e-01  5.088701e-01  9.157359e-01  5.383063e-01
-[21]  9.007411e-01  3.011163e-01  7.316577e-01  4.550739e-01  7.808249e-01
-[26]  4.681285e-01  2.897026e-01  4.317861e-01  8.630390e-01  6.482512e-01
-[31]  6.424181e-01  3.982694e-01  5.890647e-01  5.842650e-01  3.251527e-01
-[36]  3.011002e-01  7.662256e-01  4.302321e-01  2.227850e-01  2.605285e-01
-[41]  3.636102e-01  3.211702e-01  1.099501e-01  6.446625e-02  1.243305e-01
-[46]  5.977328e-01  2.912752e-01  2.073415e-01  1.947896e-01  5.574518e-01
-[51]  3.801286e-01  2.404467e-01  1.466280e-01  2.678590e-01  2.080876e-01
-[56]  2.673410e-01  4.152382e-01  6.767900e-02  7.052163e-02  7.161085e-02
-[61]  7.466390e-02  3.244860e-03  1.902975e-03  3.287111e-04  7.605141e-05
-[66]  1.774533e-05  4.225078e-06 -1.690031e-06  0.000000e+00  0.000000e+00
-[71]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00
-[76]  0.000000e+00</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">consensus</span>(aln, <span class="at">cutoff =</span> <span class="fl">0.9</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>con<span class="sc">$</span>seq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "Q" "-" "-" "-" "-" "-" "S"
-[20] "-" "E" "-" "-" "-" "-" "-" "-" "-" "A" "-" "-" "-" "-" "-" "-" "-" "-" "-"
-[39] "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-"
-[58] "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>m1.pdb <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(taslpdbfiles[<span class="dv">1</span>])</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>occ <span class="ot">&lt;-</span> <span class="fu">vec2resno</span>(sim[<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>], m1.pdb<span class="sc">$</span>atom<span class="sc">$</span>resno)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.pdb</span>(m1.pdb, <span class="at">o=</span>occ, <span class="at">file=</span><span class="st">"m1_conserv.pdb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 </section>
 
 </main>
