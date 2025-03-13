@@ -2,7 +2,7 @@
 
 My classwork from W25 [BIMM143](https://github.com/kangssion/bimm143_github) at UC San Diego
 
-- Class04 [Introduction to R](https://github.com/kangssion/bimm143_github/blob/main/class04/SKangBIMM143Lab04.pdf)
+- Class04 [Introduction to R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class04/class04.html)
 
 - Class05 [Data viz with ggplot](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class05/class05.html)
 
