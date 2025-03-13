@@ -10,5 +10,5 @@ My classwork from W25 [BIMM143](https://github.com/kangssion/bimm143_github) at 
 
 - Class07 [Introduction to machine learning for Bioinformations 1](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class07/class07.html)
 
-- Class08 [Unsupervised learning mini-project](https://htmlpreview.github.io/?)
+- Class08 [Unsupervised learning mini-project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class08/class08.html)
 
