@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sion Kang (PID: A17052234)">
+<meta name="dcterms.date" content="2025-01-30">
 
 <title>Class 8: PCA mini project</title>
 <style>
@@ -72,10 +73,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="class08.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -94,6 +96,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 30, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -389,14 +397,17 @@ Cumulative Proportion  1.00000 1.00000</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Q4. From your results, what proportion of the original variance is captured by the first principal components (PC1)? 44.27% of the original variance is capture by PC1.</p>
+<p>Q4. From your results, what proportion of the original variance is captured by the first principal components (PC1)?</p>
 </blockquote>
+<p>44.27% of the original variance is capture by PC1.</p>
 <blockquote class="blockquote">
-<p>Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data? PC1, PC2, PC3 (3 PCs) are required to describe at least 70% of the original variance.</p>
+<p>Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data?</p>
 </blockquote>
+<p>PC1, PC2, PC3 (3 PCs) are required to describe at least 70% of the original variance.</p>
 <blockquote class="blockquote">
-<p>Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data? PC1-7 are required to describe at least 90% of the original variance.</p>
+<p>Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data?</p>
 </blockquote>
+<p>PC1-7 are required to describe at least 90% of the original variance.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(wisc.pr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -410,8 +421,9 @@ Cumulative Proportion  1.00000 1.00000</code></pre>
 <section id="interpreting-pca-results" class="level2">
 <h2 class="anchored" data-anchor-id="interpreting-pca-results">Interpreting PCA results</h2>
 <blockquote class="blockquote">
-<p>Q7. What stands out to you about this plot? Is it easy or difficult to understand? Why? This biplot sucks! We need to build our own PCA score plot of PC1 vs PC2. There are too many variables involved to understand the plot.</p>
+<p>Q7. What stands out to you about this plot? Is it easy or difficult to understand? Why?</p>
 </blockquote>
+<p>This biplot sucks! We need to build our own PCA score plot of PC1 vs PC2. There are too many variables involved to understand the plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(wisc.pr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -617,8 +629,9 @@ Number of objects: 569 </code></pre>
 <section id="results-of-hierarchical-clustering" class="level2">
 <h2 class="anchored" data-anchor-id="results-of-hierarchical-clustering">Results of hierarchical clustering</h2>
 <blockquote class="blockquote">
-<p>Q11. Using the plot() and abline() functions, what is the height at which the clustering model has 4 clusters? At h=19</p>
+<p>Q11. Using the plot() and abline() functions, what is the height at which the clustering model has 4 clusters?</p>
 </blockquote>
+<p>At h=19</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wisc.hclust)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">19</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
