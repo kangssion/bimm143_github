@@ -8,7 +8,10 @@ My classwork from W25 [BIMM143](https://github.com/kangssion/bimm143_github) at 
 
 - Class06 [R functions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class06/class06.html)
 
-- Class07 [Introduction to machine learning for Bioinformations 1](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class07/class07.html)
+- Class07 [Introduction to Machine Learning for Bioinformations 1](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class07/class07.html)
 
-- Class08 [Unsupervised learning mini-project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class08/class08.html)
+- Class08 [Unsupervised Learning mini-project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class08/class08.html)
 
+- Class10 [Structural Bioinformatics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class10/class10.html)
+
+- Class11 [Structural Bioinformatics: Protein Structure Prediction with AlphaFold](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class11/class11.html)
