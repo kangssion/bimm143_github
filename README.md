@@ -22,4 +22,4 @@ My classwork from W25 [BIMM143](https://github.com/kangssion/bimm143_github) at 
 
 - Class17 [Analyzing sequencing data in the cloud](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class17/Untitled.html)
 
-- Class18 [Investigating Pertussis and the CMI-PB project] (https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class18/class18.html)
+- Class18 [Investigating Pertussis and the CMI-PB project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class18/class18.html)
