@@ -1,0 +1,89 @@
+---
+title: "Class19: Cancer Mutation Mini-Project"
+format: html
+---
+
+```{r}
+library(bio3d)
+
+seq <- read.fasta("A17052234_mutant_seq.fa")
+seq
+```
+
+score conservation per position
+```{r}
+score <- conserv(seq)
+```
+
+the sites where amino acids/residues differ are the cancer specific mutations.
+```{r}
+mutsite <- which(score != 1.0)
+mutsite
+```
+
+```{r}
+residues <- seq$ali[, mutsite]
+residues
+```
+
+```{r}
+paste (residues[1,], mutsite, residues[2,], sep="")
+```
+
+```{r, warning= FALSE}
+cif.file1 <- "fold_2025_03_11_10_46/fold_2025_03_11_10_46_model_0.cif"
+a <- read.cif(cif.file1)
+write.pdb(a, file="AF_model1.pdb")
+```
+
+```{r,  warning= FALSE}
+cif.file2 <- "fold_2025_03_11_10_46/fold_2025_03_11_10_46_model_1.cif"
+a <- read.cif(cif.file2)
+write.pdb(a, file="AF_model2.pdb")
+```
+
+```{r,  warning= FALSE}
+cif.file3 <- "fold_2025_03_11_10_46/fold_2025_03_11_10_46_model_2.cif"
+a <- read.cif(cif.file3)
+write.pdb(a, file="AF_model3.pdb")
+```
+
+```{r,  warning= FALSE}
+cif.file4 <- "fold_2025_03_11_10_46/fold_2025_03_11_10_46_model_3.cif"
+a <- read.cif(cif.file4)
+write.pdb(a, file="AF_model4.pdb")
+```
+
+```{r,  warning= FALSE}
+cif.file5 <- "fold_2025_03_11_10_46/fold_2025_03_11_10_46_model_4.cif"
+a <- read.cif(cif.file5)
+write.pdb(a, file="AF_model5.pdb")
+```
+
+```{r}
+results_dir <- "AF_modelspdb/"
+```
+
+```{r}
+# File names for all PDB models
+pdb_files <- list.files(path=results_dir,
+                        pattern="*.pdb",
+                        full.names = TRUE)
+
+# Print our PDB file names
+basename(pdb_files)
+```
+```{r}
+library(bio3d)
+
+# Read all data from Models 
+#  and superpose/fit coords
+pdbs <- pdbaln(pdb_files)
+```
+
+```{r}
+core <- core.find(pdbs)
+core.inds <- print(core, vol=0.5)
+xyz <- pdbfit(pdbs, core.inds, outpath="corefit_structures")
+```
+
