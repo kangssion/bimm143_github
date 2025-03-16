@@ -1,6 +1,6 @@
-# BIMM143 Portfolio
+# BIMM143 Portfolio - Sion Kang
 
-My classwork from W25 [BIMM143](https://github.com/kangssion/bimm143_github) at UC San Diego
+My repository from W25 [BIMM143](https://github.com/kangssion/bimm143_github) Bioinformatics Lab at UC San Diego
 
 - Class04 [Introduction to R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/kangssion/bimm143_github/refs/heads/main/class04/class04.html)
 
