@@ -2,7 +2,7 @@
 title: "Class14: RNA-Seq analysis mini-project"
 author: "Sion Kang (PID: A17052234)"
 date: 02/20/25
-format: pdf
+format: html
 toc: TRUE
 ---
 

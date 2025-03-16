@@ -2,7 +2,7 @@
 title: "Class13: RNA Seq (pt.1)"
 author: "Sion Kang (PID: A17052234)"
 date: 02/18/25
-format: pdf
+format: html
 toc: TRUE
 ---
 
